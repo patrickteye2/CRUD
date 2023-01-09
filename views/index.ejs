@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <title> <%= title %> </title>
+
+
+</head>
+<body> 
+  <div class="container">
+    <div>
+        <h1>
+            <%= title %>
+        </h1>
+
+        <% if(action == 'add') { %>
+            <div class="wrapper">
+                <form method="POST" action="/add" class="form">
+                   <div class="form-control">
+                    <label for="last-name" >Last Name *</label>
+                    <input class="form-input" type="text" name="last_name" id="last-name" placeholder="Last Name"> 
+                   </div>
+                   <div class="form-control">
+                    <label for="other-names">Other Names *</label>
+                    <input class="form-input" type="text" name="other_names" id="other-names" placeholder="First Name, Middle Name"> 
+                   </div>
+                   <div class="form-control">
+                    <label for="birthday">Date Of Birth *</label>
+                    <input class="form-input" type="date" name="birthday" id="birthday"> 
+                   </div> 
+                    <input class="button submit" type="submit" name="submit_button" value="Register"/>
+                </form>
+            </div>
+
+            <% } else { %>    
+
+    <table >
+        <button class="button add"><a href="/add" >ADD</a></button>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Other Names</th>
+            <th scope="col">DOB</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%
+          if(workData.length > 0)
+          {
+            workData.forEach(function(data){
+            %>
+            <tr>
+                <th scope="row"> <%= data.id %> </th>
+                <td> <%= data.Last_Name %> </td>
+                <td> <%= data.Other_Names %> </td>
+                <td> <%= data.Date_Of_Birth %> </td>
+              </tr>
+            <%
+            });
+          }
+          else
+          {
+            %>
+            <tr>
+                <td id="no-data" colspan="4">No Data Found :( </td>
+              </tr>
+            <%
+            }
+            %>
+        </tbody>
+      </table>
+
+      <% } %>
+    </div>
+   </div>
+  </body>
+</html>
